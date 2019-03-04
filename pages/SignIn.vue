@@ -36,7 +36,18 @@
                   <Alert @dismissed="onDismissed" :text="error.message"/>
                 </v-flex>
                 <v-flex xs12 class="my-2 text-xs-center">
-                  <v-btn type="submit" large class="primary white--text">Sign In</v-btn>
+                  <v-btn
+                    type="submit"
+                    :disabled="loading"
+                    :loading="loading"
+                    large
+                    class="primary white--text"
+                  >
+                    Sign In
+                    <span slot="loader" class="custom-loader">
+                      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                    </span>
+                  </v-btn>
                 </v-flex>
                 <v-flex xs12 class="text-xs-center my-2">
                   <v-btn
@@ -73,6 +84,9 @@ export default {
     },
     error() {
       return this.$store.getters.error;
+    },
+    loading() {
+      return this.$store.getters.loading;
     }
   },
   watch: {
