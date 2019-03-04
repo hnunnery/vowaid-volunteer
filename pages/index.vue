@@ -1,5 +1,10 @@
 <template>
   <v-container>
+    <v-layout row justify-center v-if="loading">
+      <v-flex xs12 class="text-xs-center">
+        <v-progress-circular :size="70" color="primary" indeterminate></v-progress-circular>
+      </v-flex>
+    </v-layout>
     <v-layout row wrap justify-center>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">
         <v-card>
@@ -60,6 +65,9 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       );
+    },
+    loading() {
+      return this.$store.getters.loading;
     }
   },
   created() {

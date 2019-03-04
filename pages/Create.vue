@@ -58,6 +58,7 @@
 
 <script>
 export default {
+  middleware: "auth-guard",
   data() {
     return {
       title: "",

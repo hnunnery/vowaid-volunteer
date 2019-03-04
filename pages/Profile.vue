@@ -9,5 +9,7 @@
 </template>
 
 <script>
-export default {};
+export default {
+  middleware: "auth-guard"
+};
 </script>

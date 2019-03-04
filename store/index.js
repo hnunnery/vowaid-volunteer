@@ -37,6 +37,7 @@ export const mutations = {
 
 export const actions = {
   loadEvents({ commit }) {
+    commit("setLoading", true);
     firebase
       .database()
       .ref("events")
@@ -56,9 +57,11 @@ export const actions = {
           });
         }
         commit("setLoadedEvents", events);
+        commit("setLoading", false);
       })
       .catch(error => {
         console.log(error);
+        commit("setLoading", false);
       });
   },
   createEvent({ commit }, payload) {

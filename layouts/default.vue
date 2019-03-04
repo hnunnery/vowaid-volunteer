@@ -13,7 +13,7 @@
       </v-flex>
       <!-- NAVBAR FOR MEDIUM AND UP SCREEN SIZES -->
       <v-toolbar-items class="hidden-md-and-down">
-        <v-btn v-if="userAuth" flat to="/">
+        <v-btn flat to="/">
           <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Events</span>
         </v-btn>
@@ -128,22 +128,22 @@
     </v-content>
 
     <v-footer height="auto" class="page-footer">
-      <v-card flat tile color="#111" class="flex">
+      <v-card flat tile color="#1C1C1C" class="flex">
         <v-layout row wrap justify-center align-center class="mt-2 mb-3">
           <v-flex xs12 class="text-xs-center mb-2">
-            <v-btn class="mx-3" dark icon>
+            <v-btn class="mx-3" icon>
               <a href="https://www.facebook.com/vowaid" target="_blank">
-                <v-icon size="32px">fab fa-facebook</v-icon>
+                <v-icon class="white--text" size="32px">fab fa-facebook</v-icon>
               </a>
             </v-btn>
-            <v-btn class="mx-3" dark icon>
+            <v-btn class="mx-3" icon>
               <a href="https://twitter.com/vow_aid" target="_blank">
-                <v-icon size="32px">fab fa-twitter</v-icon>
+                <v-icon class="white--text" size="32px">fab fa-twitter</v-icon>
               </a>
             </v-btn>
-            <v-btn class="mx-3" dark icon>
+            <v-btn class="mx-3" icon>
               <a href="https://www.instagram.com/vow_aid" target="_blank">
-                <v-icon size="32px">fab fa-instagram</v-icon>
+                <v-icon class="white--text" size="32px">fab fa-instagram</v-icon>
               </a>
             </v-btn>
           </v-flex>
@@ -154,7 +154,7 @@
                   Created by
                   <a href="https://www.codehunter.io" target="_blank">
                     <span class="b-align">code</span>
-                    <span class="text--white font-weight-bold">Hunter</span>
+                    <span class="white--text font-weight-bold">Hunter</span>
                   </a> Web Design and Development
                 </p>
               </v-flex>
