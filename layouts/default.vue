@@ -13,25 +13,33 @@
       </v-flex>
       <!-- NAVBAR FOR MEDIUM AND UP SCREEN SIZES -->
       <v-toolbar-items class="hidden-md-and-down">
-        <v-btn flat href="https://www.vowaidfoundation.org">
-          <v-icon class="primary--text navbar-icons">fas fa-home</v-icon>&nbsp;
-          <span class="nav-text primary--text">Main Site</span>
+        <v-btn v-if="userAuth" flat to="/">
+          <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
+          <span class="nav-text primary--text">Events</span>
+        </v-btn>
+        <v-btn v-if="userAuth" flat to="/create">
+          <v-icon class="primary--text navbar-icons">fas fa-calendar-day</v-icon>&nbsp;
+          <span class="nav-text primary--text">Create</span>
         </v-btn>
         <v-btn v-if="!userAuth" flat to="/signin">
           <v-icon class="primary--text navbar-icons">fas fa-unlock</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign In</span>
         </v-btn>
+        <v-btn v-if="!userAuth" flat to="signup">
+          <v-icon class="primary--text navbar-icons">fas fa-user-plus</v-icon>&nbsp;
+          <span class="nav-text primary--text">Sign Up</span>
+        </v-btn>
         <v-btn v-if="userAuth" flat>
           <v-icon class="primary--text navbar-icons">fas fa-lock</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign Out</span>
         </v-btn>
-        <v-btn v-if="userAuth" flat to="/">
-          <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
-          <span class="nav-text primary--text">Events</span>
-        </v-btn>
         <v-btn v-if="userAuth" flat to="/profile">
           <v-icon class="primary--text navbar-icons">fas fa-user</v-icon>&nbsp;
           <span class="nav-text primary--text">Profile</span>
+        </v-btn>
+        <v-btn flat href="https://www.vowaidfoundation.org">
+          <v-icon class="primary--text navbar-icons">fas fa-home</v-icon>&nbsp;
+          <span class="nav-text primary--text">Main Site</span>
         </v-btn>
       </v-toolbar-items>
       <!-- NAVBAR FOR SMALL AND EXTRA SMALL SCREEN SIZES -->

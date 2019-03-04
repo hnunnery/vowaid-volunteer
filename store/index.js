@@ -1,36 +1,23 @@
-import * as firebase from "firebase";
+import firebase from "firebase";
+import "firebase/auth";
+import "firebase/firestore";
+import config from "@/plugins/firebase/config";
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(config);
+}
 
 export const state = () => ({
-  loadedEvents: [
-    {
-      imageUrl:
-        "https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,w_600/v1538694547/VOWAID/coachella.jpg",
-      id: "0001",
-      title: "2019 Coachella Volunteer Event",
-      location: "Los Angelos, CA",
-      date: "2019-07-01",
-      time: "1500 PST",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora voluptate quibusdam hic ipsa beatae sit fugiat aliquam ab repellat, iste est repellendus dolores eius culpa!"
-    },
-    {
-      imageUrl:
-        "https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,q_auto:best,w_600/v1535518449/VOWAID/oscarsedit.jpg",
-      id: "0002",
-      title: "2019 Oscars Volunteer Event",
-      location: "Los Angelos, CA",
-      date: "2019-02-01",
-      time: "1500 PST",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora voluptate quibusdam hic ipsa beatae sit fugiat aliquam ab repellat, iste est repellendus dolores eius culpa!"
-    }
-  ],
+  loadedEvents: [],
   user: null,
   loading: false,
   error: null
 });
 
 export const mutations = {
+  setLoadedEvents(state, payload) {
+    state.loadedEvents = payload;
+  },
   createEvent(state, payload) {
     state.loadedEvents.push(payload);
   },
@@ -49,6 +36,31 @@ export const mutations = {
 };
 
 export const actions = {
+  loadEvents({ commit }) {
+    firebase
+      .database()
+      .ref("events")
+      .once("value")
+      .then(data => {
+        const events = [];
+        const obj = data.val();
+        for (let key in obj) {
+          events.push({
+            id: key,
+            title: obj[key].title,
+            location: obj[key].location,
+            description: obj[key].description,
+            date: obj[key].date,
+            time: obj[key].time,
+            imageUrl: obj[key].imageUrl
+          });
+        }
+        commit("setLoadedEvents", events);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  },
   createEvent({ commit }, payload) {
     const event = {
       title: payload.title,
@@ -56,11 +68,23 @@ export const actions = {
       imageUrl: payload.imageUrl,
       description: payload.description,
       date: payload.date,
-      time: payload.time,
-      id: "0003"
+      time: payload.time
     };
     // Reach out to Firebase and store it
-    commit("createEvent", event);
+    firebase
+      .database()
+      .ref("events")
+      .push(event)
+      .then(data => {
+        const key = data.key;
+        commit("createEvent", {
+          ...event,
+          id: key
+        });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   },
   signUserUp({ commit }, payload) {
     commit("setLoading", true);

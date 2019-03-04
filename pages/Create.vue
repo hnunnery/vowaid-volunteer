@@ -79,7 +79,7 @@ export default {
         time: this.time
       };
       this.$store.dispatch("createEvent", eventData);
-      this.$router.push("/events");
+      this.$router.push("/");
     }
   }
 };

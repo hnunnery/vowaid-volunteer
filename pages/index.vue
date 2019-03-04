@@ -61,6 +61,9 @@ export default {
         this.$store.getters.user !== undefined
       );
     }
+  },
+  created() {
+    this.$store.dispatch("loadEvents");
   }
 };
 </script>
