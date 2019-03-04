@@ -9,8 +9,5 @@
 </template>
 
 <script>
-export default {
-  name: "profile",
-  layout: "events"
-};
+export default {};
 </script>

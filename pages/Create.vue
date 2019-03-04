@@ -28,6 +28,12 @@
                 required
               ></v-textarea>
             </v-flex>
+            <v-flex xs6 class="text-xs-center px-2">
+              <v-text-field name="date" label="Date (2019-01-30)" id="date" v-model="date" required></v-text-field>
+            </v-flex>
+            <v-flex xs6 class="text-xs-center px-2">
+              <v-text-field name="time" label="Time (1800 PST)" id="time" v-model="time" required></v-text-field>
+            </v-flex>
             <v-flex xs12 class="text-xs-center px-2">
               <v-text-field
                 name="imageUrl"
@@ -40,21 +46,8 @@
             <v-flex xs10 sm6>
               <v-img :src="imageUrl"></v-img>
             </v-flex>
-            <v-layout row wrap justify-center align-center class="mb-3">
-              <v-flex xs12 lg6 class="text-xs-center pa-2">
-                <v-date-picker v-model="date"></v-date-picker>
-              </v-flex>
-              <v-flex xs12 lg6 class="text-xs-center pa-2">
-                <v-time-picker v-model="time"></v-time-picker>
-              </v-flex>
-            </v-layout>
             <v-flex xs12 class="text-xs-center">
-              <v-btn
-                type="submit"
-                large
-                class="primary white--text"
-                :disabled="!formIsValid"
-              >Create Event</v-btn>
+              <v-btn type="submit" large class="primary white--text">Create Event</v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -65,27 +58,15 @@
 
 <script>
 export default {
-  name: "create-event",
-  layout: "events",
   data() {
     return {
       title: "",
       location: "",
       imageUrl: "",
       description: "",
-      date: new Date(),
-      time: new Date()
+      date: "",
+      time: ""
     };
-  },
-  computed: {
-    formIsValid() {
-      return (
-        this.title !== "" &&
-        this.location !== "" &&
-        this.imageUrl !== "" &&
-        this.description !== ""
-      );
-    }
   },
   methods: {
     onCreateEvent() {
@@ -94,10 +75,11 @@ export default {
         location: this.location,
         imageUrl: this.imageUrl,
         description: this.description,
-        date: new Date()
+        date: this.date,
+        time: this.time
       };
       this.$store.dispatch("createEvent", eventData);
-      this.$router.push("/volunteer/events");
+      this.$router.push("/events");
     }
   }
 };

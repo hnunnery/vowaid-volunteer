@@ -4,13 +4,18 @@
       <v-flex xs12 sm8 lg6>
         <v-card class="px-2">
           <v-container>
-            <form @submit.prevent="onSignIn">
+            <form @submit.prevent="onSignUp">
               <v-layout row wrap justify-center>
                 <v-flex xs8 sm6 class="ma-3">
                   <v-img
                     src="https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,q_100,w_705/v1535429145/VOWAID/vowaid-logo-dark-shadow.png"
                     alt="logo"
                   ></v-img>
+                </v-flex>
+                <v-flex xs12 class="text-xs-center">
+                  <nuxt-link to="/signup">
+                    <h4 class="headline primary--text mt-2">New User Registration</h4>
+                  </nuxt-link>
                 </v-flex>
                 <v-flex xs12 class="my-2">
                   <v-text-field
@@ -36,10 +41,7 @@
                   <Alert @dismissed="onDismissed" :text="error.message"/>
                 </v-flex>
                 <v-flex xs12 class="my-2 text-xs-center">
-                  <v-btn type="submit" large class="primary white--text">Sign In</v-btn>
-                </v-flex>
-                <v-flex xs12 class="text-xs-center my-2">
-                  <v-btn to="/signup" class="secondary white--text">New Users Sign Up Here</v-btn>
+                  <v-btn type="submit" large class="primary white--text">Sign Up</v-btn>
                 </v-flex>
               </v-layout>
             </form>
@@ -79,9 +81,9 @@ export default {
     }
   },
   methods: {
-    onSignIn() {
+    onSignUp() {
       // Vuex
-      this.$store.dispatch("signUserIn", {
+      this.$store.dispatch("signUserUp", {
         email: this.email,
         password: this.password
       });

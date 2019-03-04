@@ -28,8 +28,5 @@
 </template>
 
 <script>
-export default {
-  name: "view-event",
-  layout: "events"
-};
+export default {};
 </script>

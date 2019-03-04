@@ -1,5 +1,5 @@
 {
-  "name": "vowaid",
+  "name": "vowaid-volunteers",
   "version": "1.0.0",
   "description": "The Veterans of War Aid Foundation (VOWAID) is a 501 (c) 3 non-profit organization founded by U.S. Service Members, dedicated to assisting veterans, spouses, children of disabled Veterans and Fallen Heroes by providing opportunities for financial, emotional growth and self- empowerment.",
   "author": "Hunter Nunnery",
@@ -11,8 +11,6 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/google-analytics": "^2.1.0",
-    "aos": "^3.0.0-beta.6",
     "cross-env": "^5.2.0",
     "firebase": "^5.8.5",
     "node-sass": "^4.11.0",

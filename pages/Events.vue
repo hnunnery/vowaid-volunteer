@@ -27,7 +27,7 @@
                         size="25px"
                         class="primary--text mr-2 hidden-sm-and-down"
                       >fas fa-calendar-alt</v-icon>
-                      {{ event.date }}
+                      {{ event.date }} {{ event.time }}
                     </p>
                   </v-flex>
                 </v-layout>
@@ -51,8 +51,6 @@
 
 <script>
 export default {
-  name: "view-events",
-  layout: "events",
   computed: {
     events() {
       return this.$store.getters.loadedEvents;
