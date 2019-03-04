@@ -129,6 +129,13 @@ export const actions = {
         console.log(error);
       });
   },
+  autoSignIn({ commit }, payload) {
+    commit("setUser", { id: payload.uid, registeredEvents: [] });
+  },
+  logout({ commit }) {
+    firebase.auth().signOut();
+    commit("setUser", null);
+  },
   clearError({ commit }) {
     commit("clearError");
   }

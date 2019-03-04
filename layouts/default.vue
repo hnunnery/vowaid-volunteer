@@ -22,24 +22,24 @@
           <span class="nav-text primary--text">Create</span>
         </v-btn>
         <v-btn v-if="!userAuth" flat to="/signin">
-          <v-icon class="primary--text navbar-icons">fas fa-unlock</v-icon>&nbsp;
+          <v-icon class="primary--text navbar-icons">fas fa-sign-in-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign In</span>
         </v-btn>
         <v-btn v-if="!userAuth" flat to="signup">
           <v-icon class="primary--text navbar-icons">fas fa-user-plus</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign Up</span>
         </v-btn>
-        <v-btn v-if="userAuth" flat>
-          <v-icon class="primary--text navbar-icons">fas fa-lock</v-icon>&nbsp;
+        <v-btn @click="onLogout" v-if="userAuth" flat>
+          <v-icon class="primary--text navbar-icons">fas fa-sign-out-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign Out</span>
         </v-btn>
         <v-btn v-if="userAuth" flat to="/profile">
-          <v-icon class="primary--text navbar-icons">fas fa-user</v-icon>&nbsp;
+          <v-icon class="primary--text navbar-icons">fas fa-user-circle</v-icon>&nbsp;
           <span class="nav-text primary--text">Profile</span>
         </v-btn>
         <v-btn flat href="https://www.vowaidfoundation.org">
           <v-icon class="primary--text navbar-icons">fas fa-home</v-icon>&nbsp;
-          <span class="nav-text primary--text">Main Site</span>
+          <span class="nav-text primary--text">Home</span>
         </v-btn>
       </v-toolbar-items>
       <!-- NAVBAR FOR SMALL AND EXTRA SMALL SCREEN SIZES -->
@@ -82,7 +82,7 @@
         </v-list-tile>
         <v-list-tile v-if="!userAuth" to="/signin" class="sidenav-element">
           <v-list-tile-action>
-            <v-icon class="primary--text text-xs-center">fas fa-unlock-alt</v-icon>
+            <v-icon class="primary--text text-xs-center">fas fa-sign-in-alt</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign In</v-list-tile-title>
@@ -96,9 +96,9 @@
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign Up</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="userAuth" class="sidenav-element">
+        <v-list-tile @click="onLogout" v-if="userAuth" class="sidenav-element">
           <v-list-tile-action>
-            <v-icon class="primary--text text-xs-center">fas fa-lock</v-icon>
+            <v-icon class="primary--text text-xs-center">fas fa-sign-out-alt</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign Out</v-list-tile-title>
@@ -106,7 +106,7 @@
         </v-list-tile>
         <v-list-tile v-if="userAuth" to="/profile" class="sidenav-element">
           <v-list-tile-action>
-            <v-icon class="primary--text text-xs-center">fas fa-user</v-icon>
+            <v-icon class="primary--text text-xs-center">fas fa-user-circle</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Profile</v-list-tile-title>
@@ -117,7 +117,7 @@
             <v-icon class="primary--text text-xs-center">fas fa-home</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Main Site</v-list-tile-title>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Home</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -190,6 +190,11 @@ export default {
         this.$store.getters.user !== undefined
       );
     }
+  },
+  methods: {
+    onLogout() {
+      this.$store.dispatch("logout");
+    }
   }
 };
 </script>
@@ -232,17 +237,17 @@ export default {
 .v-list {
   padding: 0 !important;
   .fa-user,
-  .fa-lock {
+  .fa-sign-out-alt,
+  .fa-user-plus {
     margin-left: 2px;
   }
   .fa-calendar-alt,
   .fa-calendar-day {
     margin-left: 2px;
   }
-  .fa-user-circle,
-  .fa-user-plus,
-  .fa-unlock-alt {
-    margin-left: 2px;
+  .fa-sign-in-alt,
+  .fa-user-circle {
+    margin-left: 1px;
   }
 }
 

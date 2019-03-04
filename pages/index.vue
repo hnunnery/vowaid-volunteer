@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import firebase from "firebase";
+
 export default {
   computed: {
     events() {
@@ -71,7 +73,14 @@ export default {
     }
   },
   created() {
+    // fetching events from firebase
     this.$store.dispatch("loadEvents");
+    // signing in users with firebase auth tokens
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.$store.dispatch("autoSignIn", user);
+      }
+    });
   }
 };
 </script>
