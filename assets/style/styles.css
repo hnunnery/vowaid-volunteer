@@ -1,0 +1,52 @@
+#app {
+  overflow: hidden;
+}
+
+:root {
+  /* Vuetify Primary */
+  --orange: #2a2968;
+  /* Vuetify Accent */
+  --accent: #2a2968;
+  /* Vuetify Secondary */
+  --secondary: #2c2c2c;
+  /* Darker Orange */
+  --dark: #2a2968;
+}
+
+.desktop {
+  display: none;
+}
+@media screen and (min-width: 960px) {
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+}
+.twentyeight {
+  font-size: 28px;
+}
+.subheading {
+  font-size: 1.3em !important;
+}
+
+.responsive-img {
+  max-width: 100%;
+  height: auto;
+}
+ul {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.hidden {
+  display: none !important;
+}
