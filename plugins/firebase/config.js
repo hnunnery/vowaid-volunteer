@@ -3,7 +3,7 @@ const config = {
   authDomain: "vowaid-volunteer.firebaseapp.com",
   databaseURL: "https://vowaid-volunteer.firebaseio.com",
   projectId: "vowaid-volunteer",
-  storageBucket: "vowaid-volunteer.appspot.com",
+  storageBucket: "gs://vowaid-volunteer.appspot.com/",
   messagingSenderId: "217891530771"
 };
 

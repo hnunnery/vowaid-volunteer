@@ -53,7 +53,8 @@ export const actions = {
             description: obj[key].description,
             date: obj[key].date,
             time: obj[key].time,
-            imageUrl: obj[key].imageUrl
+            imageUrl: obj[key].imageUrl,
+            creatorId: obj[key].creatorId
           });
         }
         commit("setLoadedEvents", events);
@@ -64,24 +65,45 @@ export const actions = {
         commit("setLoading", false);
       });
   },
-  createEvent({ commit }, payload) {
+  createEvent({ commit, getters }, payload) {
     const event = {
       title: payload.title,
       location: payload.location,
-      imageUrl: payload.imageUrl,
       description: payload.description,
       date: payload.date,
-      time: payload.time
+      time: payload.time,
+      creatorId: getters.user.id
     };
-    // Reach out to Firebase and store it
+    let imageUrl;
+    let key;
     firebase
       .database()
       .ref("events")
       .push(event)
       .then(data => {
-        const key = data.key;
+        key = data.key;
+        return key;
+      })
+      .then(key => {
+        const filename = payload.image.name;
+        const ext = filename.slice(filename.lastIndexOf("."));
+        return firebase
+          .storage()
+          .ref("events/" + key + ext)
+          .put(payload.image);
+      })
+      .then(fileData => {
+        imageUrl = fileData.metadata.downloadURLs[0];
+        return firebase
+          .database()
+          .ref("events")
+          .child(key)
+          .update({ imageUrl: imageUrl });
+      })
+      .then(() => {
         commit("createEvent", {
           ...event,
+          imageUrl: imageUrl,
           id: key
         });
       })
