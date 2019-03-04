@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="wrapper">
     <v-layout row wrap justify-center align-center>
       <v-flex xs12 sm8 lg6>
         <v-card class="px-2">
@@ -8,11 +8,11 @@
               <v-layout row wrap justify-center>
                 <v-flex xs8 sm6 class="ma-3">
                   <v-img
-                    src="https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,q_100,w_705/v1535429145/VOWAID/vowaid-logo-dark-shadow.png"
+                    src="https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,q_100,w_500/v1535429145/VOWAID/vowaid-logo-dark-shadow.png"
                     alt="logo"
                   ></v-img>
                 </v-flex>
-                <v-flex xs12 class="my-2">
+                <v-flex xs12 lg8 class="my-2">
                   <v-text-field
                     name="email"
                     label="Email"
@@ -22,7 +22,7 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 class="my-2">
+                <v-flex xs12 lg8 class="my-2">
                   <v-text-field
                     name="password"
                     label="Password"
@@ -32,14 +32,18 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 class="text-xs-center" v-if="error">
+                <v-flex xs12 lg8 class="text-xs-center" v-if="error">
                   <Alert @dismissed="onDismissed" :text="error.message"/>
                 </v-flex>
                 <v-flex xs12 class="my-2 text-xs-center">
                   <v-btn type="submit" large class="primary white--text">Sign In</v-btn>
                 </v-flex>
                 <v-flex xs12 class="text-xs-center my-2">
-                  <v-btn to="/signup" class="secondary white--text">New Users Sign Up Here</v-btn>
+                  <v-btn
+                    @click="onDismissed"
+                    to="/signup"
+                    class="secondary white--text"
+                  >New Users Sign Up Here</v-btn>
                 </v-flex>
               </v-layout>
             </form>
@@ -80,7 +84,6 @@ export default {
   },
   methods: {
     onSignIn() {
-      // Vuex
       this.$store.dispatch("signUserIn", {
         email: this.email,
         password: this.password
@@ -92,3 +95,14 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+form {
+  font-size: 16px !important;
+}
+@media screen and (min-height: 700px) {
+  .wrapper {
+    margin-top: 6vh !important;
+  }
+}
+</style>

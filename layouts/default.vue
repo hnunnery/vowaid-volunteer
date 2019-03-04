@@ -13,9 +13,9 @@
       </v-flex>
       <!-- NAVBAR FOR MEDIUM AND UP SCREEN SIZES -->
       <v-toolbar-items class="hidden-md-and-down">
-        <v-btn v-if="userAuth" flat to="/">
+        <v-btn flat href="https://www.vowaidfoundation.org">
           <v-icon class="primary--text navbar-icons">fas fa-home</v-icon>&nbsp;
-          <span class="nav-text primary--text">Home</span>
+          <span class="nav-text primary--text">Main Site</span>
         </v-btn>
         <v-btn v-if="!userAuth" flat to="/signin">
           <v-icon class="primary--text navbar-icons">fas fa-unlock</v-icon>&nbsp;
@@ -25,7 +25,7 @@
           <v-icon class="primary--text navbar-icons">fas fa-lock</v-icon>&nbsp;
           <span class="nav-text primary--text">Sign Out</span>
         </v-btn>
-        <v-btn v-if="userAuth" flat to="/events">
+        <v-btn v-if="userAuth" flat to="/">
           <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Events</span>
         </v-btn>
@@ -51,12 +51,25 @@
       app
     >
       <v-list>
+        <img
+          src="https://res.cloudinary.com/missionwebdev/image/upload/c_scale,f_auto,q_100,w_130/v1535429145/VOWAID/vowaid-logo-dark-shadow.png"
+          alt="logo"
+          class="responsive-img ml-4 my-3 text-xs-left"
+        >
         <v-list-tile to="/" class="sidenav-element">
           <v-list-tile-action>
-            <v-icon v-if="userAuth" class="primary--text text-xs-center">fas fa-home</v-icon>
+            <v-icon class="primary--text text-xs-center">fas fa-calendar-alt</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Home</v-list-tile-title>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Events</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile v-if="userAuth" to="/create" class="sidenav-element">
+          <v-list-tile-action>
+            <v-icon class="primary--text text-xs-center">fas fa-calendar-day</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Create</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile v-if="!userAuth" to="/signin" class="sidenav-element">
@@ -67,20 +80,20 @@
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign In</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="userAuth" class="sidenav-element">
+        <v-list-tile v-if="!userAuth" to="/signup" class="sidenav-element">
           <v-list-tile-action>
             <v-icon class="primary--text text-xs-center">fas fa-user-plus</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign Out</v-list-tile-title>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign Up</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="userAuth" to="/events" class="sidenav-element">
+        <v-list-tile v-if="userAuth" class="sidenav-element">
           <v-list-tile-action>
-            <v-icon class="primary--text text-xs-center">fas fa-calendar-alt</v-icon>
+            <v-icon class="primary--text text-xs-center">fas fa-lock</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Events</v-list-tile-title>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Sign Out</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
         <v-list-tile v-if="userAuth" to="/profile" class="sidenav-element">
@@ -89,6 +102,14 @@
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Profile</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+        <v-list-tile href="https://www.vowaidfoundation.org" class="sidenav-element">
+          <v-list-tile-action>
+            <v-icon class="primary--text text-xs-center">fas fa-home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Main Site</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
       </v-list>
@@ -202,13 +223,17 @@ export default {
 /* STYLE NAVIGATION DRAWER */
 .v-list {
   padding: 0 !important;
-  .fa-home {
-    margin-left: 1px;
+  .fa-user,
+  .fa-lock {
+    margin-left: 2px;
   }
-  .fa-calendar-alt {
-    margin-left: 3px;
+  .fa-calendar-alt,
+  .fa-calendar-day {
+    margin-left: 2px;
   }
-  .fa-user-circle {
+  .fa-user-circle,
+  .fa-user-plus,
+  .fa-unlock-alt {
     margin-left: 2px;
   }
 }
