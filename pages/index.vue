@@ -5,7 +5,7 @@
         <v-progress-circular :size="70" color="primary" indeterminate></v-progress-circular>
       </v-flex>
     </v-layout>
-    <v-layout row wrap justify-center>
+    <v-layout row wrap justify-center v-else>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">
         <v-card>
           <v-container fluid>
@@ -58,7 +58,7 @@
                     <v-icon left size="20px">fas fa-check</v-icon>Registered
                   </v-btn>
                   <span v-if="userIsAdmin">
-                    <Edit/>
+                    <Edit :event="event"/>
                   </span>
                 </p>
               </v-flex>

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="350px" persistent>
+  <v-dialog width="350px" persistent v-model="editDialog">
     <v-btn fab class="primary" slot="activator">
       <v-icon class="white--text">fas fa-pencil-alt</v-icon>
     </v-btn>
@@ -11,28 +11,37 @@
             <v-divider></v-divider>
           </v-flex>
           <v-flex xs12 class="text-xs-center px-2">
-            <v-text-field name="title" label="Title" id="title" v-model="title" required></v-text-field>
+            <v-text-field name="title" label="Title" id="title" v-model="editedTitle" required></v-text-field>
           </v-flex>
           <v-flex xs12 class="text-xs-center px-2">
             <v-text-field
               name="location"
               label="Location"
               id="location"
-              v-model="location"
+              v-model="editedLocation"
               required
             ></v-text-field>
+          </v-flex>
+          <v-flex xs12 class="text-xs-center px-2">
+            <v-text-field name="date" label="Date" id="date" v-model="editedDate" required></v-text-field>
+          </v-flex>
+          <v-flex xs12 class="text-xs-center px-2">
+            <v-text-field name="time" label="Time" id="time" v-model="editedTime" required></v-text-field>
           </v-flex>
           <v-flex xs12 class="text-xs-center px-2">
             <v-textarea
               name="description"
               label="Description"
               id="description"
-              v-model="description"
+              v-model="editedDescription"
               required
             ></v-textarea>
           </v-flex>
           <v-flex xs12 class="text-xs-center">
-            <v-btn type="submit" large class="primary white--text">Update Event</v-btn>
+            <v-btn @click="editDialog = false" fab class="white--text grey darken-2">
+              <v-icon>fas fa-times</v-icon>
+            </v-btn>
+            <v-btn @click="onSaveChanges" large class="primary white--text">Update Event</v-btn>
           </v-flex>
         </v-layout>
       </v-container>
@@ -42,15 +51,29 @@
 
 <script>
 export default {
+  props: ["event"],
   data() {
     return {
-      title: "",
-      location: "",
-      imageUrl: "",
-      description: "",
-      date: "",
-      time: ""
+      editDialog: false,
+      editedTitle: this.event.title,
+      editedLocation: this.event.location,
+      editedDescription: this.event.description,
+      editedDate: this.event.date,
+      editedTime: this.event.time
     };
+  },
+  methods: {
+    onSaveChanges() {
+      this.editDialog = false;
+      this.$store.dispatch("updateEventData", {
+        id: this.event.id,
+        title: this.editedTitle,
+        location: this.editedLocation,
+        description: this.editedDescription,
+        date: this.editedDate,
+        time: this.editedTime
+      });
+    }
   }
 };
 </script>
