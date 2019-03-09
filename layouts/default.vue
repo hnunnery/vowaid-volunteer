@@ -17,7 +17,7 @@
           <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Events</span>
         </v-btn>
-        <v-btn v-if="userAuth" flat to="/create">
+        <v-btn v-if="userIsAdmin" flat to="/create">
           <v-icon class="primary--text navbar-icons">fas fa-calendar-day</v-icon>&nbsp;
           <span class="nav-text primary--text">Create</span>
         </v-btn>
@@ -72,7 +72,7 @@
             <v-list-tile-title class="primary--text nav-font-size font-weight-medium">Events</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="userAuth" to="/create" class="sidenav-element">
+        <v-list-tile v-if="userIsAdmin" to="/create" class="sidenav-element">
           <v-list-tile-action>
             <v-icon class="primary--text text-xs-center">fas fa-calendar-day</v-icon>
           </v-list-tile-action>
@@ -189,6 +189,14 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       );
+    },
+    userIsAdmin() {
+      if (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      ) {
+        return this.$store.getters.user.id === "pCDpfVtvVqdzMvFBkZIvjY7gJSR2";
+      }
     }
   },
   methods: {

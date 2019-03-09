@@ -51,7 +51,7 @@
                   class="secondary--text subheading text-xs-left description px-4"
                 >{{ event.description }}</p>
                 <p class="text-xs-center">
-                  <v-btn v-if="!registered" large class="primary white--text">
+                  <v-btn v-if="userAuth" large class="primary white--text">
                     <v-icon left size="20px">fas fa-user-plus</v-icon>Register
                   </v-btn>
                   <v-btn v-if="registered" large class="success white--text">
