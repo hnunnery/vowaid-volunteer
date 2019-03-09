@@ -149,6 +149,9 @@ export const actions = {
     if (payload.description) {
       updateObj.description = payload.description;
     }
+    if (payload.imageUrl) {
+      updateObj.imageUrl = payload.imageUrl;
+    }
     firebase
       .database()
       .ref("events")

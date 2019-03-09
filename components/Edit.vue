@@ -37,6 +37,12 @@
               required
             ></v-textarea>
           </v-flex>
+          <v-flex xs12>
+            <v-text-field name="imageUrl" label="Image URL" id="imageUrl" v-model="editedImageUrl"></v-text-field>
+          </v-flex>
+          <v-flex xs12>
+            <v-img :src="this.editedImageUrl"></v-img>
+          </v-flex>
           <v-flex xs12 class="text-xs-center">
             <v-btn @click="editDialog = false" fab class="white--text grey darken-2">
               <v-icon>fas fa-times</v-icon>
@@ -59,7 +65,8 @@ export default {
       editedLocation: this.event.location,
       editedDescription: this.event.description,
       editedDate: this.event.date,
-      editedTime: this.event.time
+      editedTime: this.event.time,
+      editedImageUrl: this.event.imageUrl
     };
   },
   methods: {
@@ -71,7 +78,8 @@ export default {
         location: this.editedLocation,
         description: this.editedDescription,
         date: this.editedDate,
-        time: this.editedTime
+        time: this.editedTime,
+        imageUrl: this.editedImageUrl
       });
     }
   }
