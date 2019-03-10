@@ -220,6 +220,43 @@ export const actions = {
         commit("setLoading", false);
       });
   },
+  onDeleteEvent({ commit }, payload) {
+    commit("setLoading", true);
+    firebase
+      .database()
+      .ref("/events/" + payload)
+      .remove()
+      .then(() => {
+        commit("setLoading", false);
+      })
+      .catch(error => {
+        console.log(error);
+        commit("setLoading", false);
+      });
+  },
+  updateUserData({ commit }, payload) {
+    commit("setLoading", true);
+    const updateObj = {};
+    updateObj.id = payload.id;
+    updateObj.email = payload.email;
+    updateObj.first = payload.first;
+    updateObj.last = payload.last;
+    updateObj.phone = payload.phone;
+    updateObj.city = payload.city;
+    firebase
+      .database()
+      .ref("users")
+      .child(payload.id)
+      .update(updateObj)
+      .then(() => {
+        commit("setUser", updateObj);
+        commit("setLoading", false);
+      })
+      .catch(error => {
+        console.log(error);
+        commit("setLoading", false);
+      });
+  },
   signUserUp({ commit }, payload) {
     commit("setLoading", true);
     commit("clearError");
@@ -229,21 +266,12 @@ export const actions = {
       .then(user => {
         commit("setLoading", false);
         const newUser = {
+          // user.uid is undefined until later
           id: user.uid,
           registeredEvents: [],
-          fbKeys: {},
-          email: payload.email,
-          phone: payload.phone,
-          first: payload.first,
-          last: payload.last,
-          city: payload.city
+          fbKeys: {}
         };
         commit("setUser", newUser);
-        firebase
-          .database()
-          .ref("/users/" + user.uid)
-          .child("/profile/")
-          .push(payload);
       })
       .catch(error => {
         commit("setLoading", false);
@@ -262,7 +290,12 @@ export const actions = {
         const newUser = {
           id: user.uid,
           registeredEvents: [],
-          fbKeys: {}
+          fbKeys: {},
+          email: "",
+          phone: "",
+          first: "",
+          last: "",
+          city: ""
         };
         commit("setUser", newUser);
       })
@@ -276,7 +309,12 @@ export const actions = {
     commit("setUser", {
       id: payload.uid,
       registeredEvents: [],
-      fbKeys: {}
+      fbKeys: {},
+      email: "",
+      phone: "",
+      first: "",
+      last: "",
+      city: ""
     });
   },
   fetchUserData({ commit, getters }) {
@@ -293,17 +331,29 @@ export const actions = {
           registeredEvents.push(dataPairs[key]);
           swappedPairs[dataPairs[key]] = key;
         }
-        const updatedUser = {
-          id: getters.user.id,
-          registeredEvents: registeredEvents,
-          fbKeys: swappedPairs
-        };
-        commit("setLoading", false);
-        commit("setUser", updatedUser);
-      })
-      .catch(error => {
-        console.log(error);
-        commit("setLoading", false);
+        firebase
+          .database()
+          .ref("/users/" + getters.user.id)
+          .once("value")
+          .then(data => {
+            const obj = data.val();
+            const updatedUser = {
+              id: getters.user.id,
+              registeredEvents: registeredEvents,
+              fbKeys: swappedPairs,
+              email: obj.email,
+              phone: obj.phone,
+              first: obj.first,
+              last: obj.last,
+              city: obj.city
+            };
+            commit("setLoading", false);
+            commit("setUser", updatedUser);
+          })
+          .catch(error => {
+            console.log(error);
+            commit("setLoading", false);
+          });
       });
   },
   logout({ commit }) {

@@ -1,7 +1,7 @@
 <template>
   <v-dialog width="350px" persistent v-model="editDialog">
-    <v-btn fab class="primary" slot="activator">
-      <v-icon class="white--text">fas fa-pencil-alt</v-icon>
+    <v-btn large flat slot="activator">
+      <v-icon small left class="primary--text">fas fa-pencil-alt</v-icon>Edit
     </v-btn>
     <v-card>
       <v-container>

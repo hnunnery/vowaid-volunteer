@@ -6,12 +6,9 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap justify-center v-else>
-      <v-flex xs12>
+      <v-flex xs12 class="text-xs-center mt-4" v-if="!userAuth">
         <nuxt-link to="/signin">
-          <h2
-            v-if="!userAuth"
-            class="display-2 text-xs-center primary--text mt-2 mx-2"
-          >Sign In to Register for Events</h2>
+          <v-btn large class="primary">Sign In To Register for Events</v-btn>
         </nuxt-link>
       </v-flex>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">
@@ -58,13 +55,25 @@
                 <p
                   class="secondary--text subheading text-xs-left description px-4"
                 >{{ event.description }}</p>
-                <p class="text-xs-center">
-                  <Register v-if="userAuth" :eventId="event.id"/>
-
-                  <span v-if="userIsAdmin">
-                    <Edit :event="event"/>
-                  </span>
-                </p>
+                <div class="text-xs-center mb-2">
+                  <Register v-if="userAuth && !userIsAdmin" :eventId="event.id"/>
+                  <v-layout v-if="userIsAdmin">
+                    <v-flex xs6>
+                      <v-btn
+                        @click="deleteEvent(event.id)"
+                        flat
+                        large
+                        class="red--text text--darken-2"
+                        slot="activator"
+                      >
+                        <v-icon small left class="red--text text--darken-2">fas fa-trash-alt</v-icon>Delete
+                      </v-btn>
+                    </v-flex>
+                    <v-flex xs6>
+                      <Edit :event="event"/>
+                    </v-flex>
+                  </v-layout>
+                </div>
               </v-flex>
             </v-layout>
           </v-container>
@@ -89,6 +98,11 @@ export default {
     return {
       registered: ""
     };
+  },
+  methods: {
+    deleteEvent(eventId) {
+      this.$store.dispatch("onDeleteEvent", eventId);
+    }
   },
   computed: {
     events() {
@@ -134,7 +148,7 @@ export default {
 }
 @media screen and (max-width: 500px) {
   .container {
-    padding: 0px !important;
+    padding: 0px 7px !important;
   }
   .v-card {
     padding-top: 10px;
