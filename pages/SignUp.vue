@@ -17,7 +17,7 @@
                     <h4 class="headline primary--text mt-2">New User Registration</h4>
                   </nuxt-link>
                 </v-flex>
-                <v-flex xs12 lg8 class="my-2">
+                <v-flex xs12 lg8 class="my-1">
                   <v-text-field
                     name="email"
                     label="Email"
@@ -27,13 +27,53 @@
                     required
                   ></v-text-field>
                 </v-flex>
-                <v-flex xs12 lg8 class="my-2">
+                <v-flex xs12 lg8 class="my-1">
                   <v-text-field
                     name="password"
                     label="Password"
                     id="password"
                     v-model="password"
                     type="password"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 lg8 class="my-1">
+                  <v-text-field
+                    name="first"
+                    label="First Name"
+                    id="first"
+                    v-model="first"
+                    type="text"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 lg8 class="my-1">
+                  <v-text-field
+                    name="last"
+                    label="Last Name"
+                    id="last"
+                    v-model="last"
+                    type="text"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 lg8 class="my-1">
+                  <v-text-field
+                    name="phone"
+                    label="Phone Number"
+                    id="phone"
+                    v-model="phone"
+                    type="text"
+                    required
+                  ></v-text-field>
+                </v-flex>
+                <v-flex xs12 lg8 class="my-1">
+                  <v-text-field
+                    name="city"
+                    label="City and State"
+                    id="city"
+                    v-model="city"
+                    type="text"
                     required
                   ></v-text-field>
                 </v-flex>
@@ -73,7 +113,11 @@ export default {
   data() {
     return {
       email: "",
-      password: ""
+      password: "",
+      first: "",
+      last: "",
+      phone: "",
+      city: ""
     };
   },
   computed: {
@@ -98,7 +142,11 @@ export default {
     onSignUp() {
       this.$store.dispatch("signUserUp", {
         email: this.email,
-        password: this.password
+        password: this.password,
+        first: this.first,
+        last: this.last,
+        phone: this.phone,
+        city: this.city
       });
     },
     onDismissed() {

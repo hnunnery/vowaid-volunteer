@@ -231,9 +231,19 @@ export const actions = {
         const newUser = {
           id: user.uid,
           registeredEvents: [],
-          fbKeys: {}
+          fbKeys: {},
+          email: payload.email,
+          phone: payload.phone,
+          first: payload.first,
+          last: payload.last,
+          city: payload.city
         };
         commit("setUser", newUser);
+        firebase
+          .database()
+          .ref("/users/" + user.uid)
+          .child("/profile/")
+          .push(payload);
       })
       .catch(error => {
         commit("setLoading", false);
