@@ -6,6 +6,14 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap justify-center v-else>
+      <v-flex xs12>
+        <nuxt-link to="/signin">
+          <h2
+            v-if="!userAuth"
+            class="display-2 text-xs-center primary--text mt-2 mx-2"
+          >Sign In to Register for Events</h2>
+        </nuxt-link>
+      </v-flex>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">
         <v-card>
           <v-container fluid>
@@ -51,12 +59,8 @@
                   class="secondary--text subheading text-xs-left description px-4"
                 >{{ event.description }}</p>
                 <p class="text-xs-center">
-                  <v-btn v-if="userAuth" large class="primary white--text">
-                    <v-icon left size="20px">fas fa-user-plus</v-icon>Register
-                  </v-btn>
-                  <v-btn v-if="registered" large class="success white--text">
-                    <v-icon left size="20px">fas fa-check</v-icon>Registered
-                  </v-btn>
+                  <Register v-if="userAuth" :eventId="event.id"/>
+
                   <span v-if="userIsAdmin">
                     <Edit :event="event"/>
                   </span>
@@ -73,11 +77,14 @@
 <script>
 import firebase from "firebase";
 import Edit from "@/components/Edit";
+import Register from "@/components/Register";
 
 export default {
   components: {
-    Edit
+    Edit,
+    Register
   },
+  props: ["id"],
   data() {
     return {
       registered: ""
@@ -112,6 +119,7 @@ export default {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
         this.$store.dispatch("autoSignIn", user);
+        this.$store.dispatch("fetchUserData");
       }
     });
   }
