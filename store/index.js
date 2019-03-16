@@ -359,6 +359,7 @@ export const actions = {
   logout({ commit }) {
     firebase.auth().signOut();
     commit("setUser", null);
+    this.$router.push("/");
   },
   clearError({ commit }) {
     commit("clearError");

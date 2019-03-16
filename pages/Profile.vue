@@ -33,6 +33,13 @@ export default {
     return {
       user: this.$store.getters.user
     };
+  },
+  watch: {
+    user(value) {
+      if (value === null || value === undefined) {
+        this.$router.push("/");
+      }
+    }
   }
 };
 </script>

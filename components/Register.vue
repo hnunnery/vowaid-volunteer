@@ -3,8 +3,11 @@
     <v-btn slot="activator" v-if="!userIsRegistered" large class="primary white--text">
       <v-icon left size="20px">fas fa-user-plus</v-icon>Register
     </v-btn>
-    <v-btn slot="activator" v-if="userIsRegistered" large class="success white--text">
+    <v-btn slot="activator" v-if="userIsRegistered" class="success white--text">
       <v-icon left size="20px">fas fa-check</v-icon>Registered
+    </v-btn>
+    <v-btn slot="activator" v-if="userIsRegistered" class="grey darken-2 white--text">
+      <v-icon left size="20px">fas fa-times</v-icon>Unregister
     </v-btn>
     <v-card>
       <v-container>
