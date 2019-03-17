@@ -11,6 +11,11 @@
           <v-btn large class="primary">Sign In To Register for Events</v-btn>
         </nuxt-link>
       </v-flex>
+      <v-flex xs12 class="text-xs-center mt-4" v-if="userAuth && !userHasProfileInfo">
+        <nuxt-link to="/profile">
+          <v-btn large class="primary">Update Profile To Register for Events</v-btn>
+        </nuxt-link>
+      </v-flex>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">
         <v-card>
           <v-container fluid>
@@ -56,7 +61,10 @@
                   class="secondary--text subheading text-xs-left description px-4"
                 >{{ event.description }}</p>
                 <div class="text-xs-center mb-2">
-                  <Register v-if="userAuth && !userIsAdmin" :eventId="event.id"/>
+                  <Register
+                    v-if="userAuth && !userIsAdmin && userHasProfileInfo"
+                    :eventId="event.id"
+                  />
                   <v-layout v-if="userIsAdmin">
                     <v-flex xs6>
                       <v-btn
@@ -124,6 +132,15 @@ export default {
       ) {
         return this.$store.getters.user.id === "pCDpfVtvVqdzMvFBkZIvjY7gJSR2";
       }
+    },
+    userHasProfileInfo() {
+      return (
+        this.$store.getters.user.email !== "" &&
+        this.$store.getters.user.phone !== "" &&
+        this.$store.getters.user.first !== "" &&
+        this.$store.getters.user.last !== "" &&
+        this.$store.getters.user.city !== ""
+      );
     },
     loading() {
       return this.$store.getters.loading;

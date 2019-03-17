@@ -2,9 +2,10 @@
   <v-container>
     <v-layout row wrap justify-center>
       <v-flex xs12 class="text-xs-center">
-        <EditProfile/>
+        <v-btn to="/updateprofile" large class="primary">
+          <v-icon left small class="white--text">fas fa-pencil-alt</v-icon>Update Profile
+        </v-btn>
       </v-flex>
-
       <v-flex xs12 sm8 md6 lg5 xl4 class="mt-4">
         <v-card class="pa-2 text-xs-center">
           <h2 class="my-3 primary--text headline">{{ user.first }} {{ user.last }}</h2>
@@ -13,7 +14,6 @@
           <p class="my-3 secondary--text subheading font-weight-bold">{{ user.city }}</p>
         </v-card>
       </v-flex>
-
       <v-flex xs12 v-for="(event, index) in user.registeredEvents" :key="index">
         <!-- <p>{{ event }}</p> -->
       </v-flex>
@@ -22,13 +22,8 @@
 </template>
 
 <script>
-import EditProfile from "@/components/EditProfile";
-
 export default {
   middleware: "auth-guard",
-  components: {
-    EditProfile
-  },
   data() {
     return {
       user: this.$store.getters.user
