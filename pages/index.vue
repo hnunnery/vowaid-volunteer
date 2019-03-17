@@ -13,7 +13,7 @@
       </v-flex>
       <v-flex xs12 class="text-xs-center mt-4" v-if="userAuth && !userHasProfileInfo">
         <nuxt-link to="/profile">
-          <v-btn large class="primary">Update Profile To Register for Events</v-btn>
+          <v-btn large class="primary">Update Profile Before Registering</v-btn>
         </nuxt-link>
       </v-flex>
       <v-flex xs12 lg11 xl10 v-for="event in events" :key="event.id" class="my-4">

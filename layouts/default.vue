@@ -13,6 +13,9 @@
       </v-flex>
       <!-- NAVBAR FOR MEDIUM AND UP SCREEN SIZES -->
       <v-toolbar-items class="hidden-md-and-down">
+        <v-btn v-if="first" flat to="/profile">
+          <span class="nav-text primary--text">{{ first }} {{ last }}</span>
+        </v-btn>
         <v-btn flat to="/">
           <v-icon class="primary--text navbar-icons">fas fa-calendar-alt</v-icon>&nbsp;
           <span class="nav-text primary--text">Events</span>
@@ -180,7 +183,9 @@ export default {
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: "Vuetify.js"
+      title: "Vuetify.js",
+      first: "",
+      last: ""
     };
   },
   computed: {
@@ -197,11 +202,29 @@ export default {
       ) {
         return this.$store.getters.user.id === "pCDpfVtvVqdzMvFBkZIvjY7gJSR2";
       }
+    },
+    fetchName() {
+      if (
+        this.$store.getters.user !== null &&
+        this.$store.getters.user !== undefined
+      ) {
+        return this.$store.getters.user.first;
+      }
     }
   },
   methods: {
     onLogout() {
       this.$store.dispatch("logout");
+    }
+  },
+  watch: {
+    fetchName() {
+      this.first = this.$store.getters.user.first;
+      this.last = this.$store.getters.user.last;
+    },
+    userAuth() {
+      this.first = "";
+      this.last = "";
     }
   }
 };

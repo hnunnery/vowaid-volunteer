@@ -1,9 +1,6 @@
 <template>
   <v-container class="pa-0">
     <v-layout row wrap justify-center align-center>
-      <v-flex xs12>
-        <v-alert v-model="alert" dismissible type="success">Profile Updated Successfully</v-alert>
-      </v-flex>
       <v-flex xs11 sm8 lg5>
         <v-card class="px-2 mt-4">
           <v-container>
@@ -64,6 +61,9 @@
                 </v-flex>
                 <v-flex xs12 class="text-xs-center">
                   <v-btn @click="onSaveChanges" large class="primary white--text">Update Profile</v-btn>
+                </v-flex>
+                <v-flex xs12>
+                  <v-alert v-model="alert" dismissible type="success">Profile Updated Successfully</v-alert>
                 </v-flex>
               </v-layout>
             </form>
