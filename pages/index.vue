@@ -101,8 +101,9 @@ export default {
   },
   methods: {
     deleteEvent(eventId) {
-      if (confirm("Are you sure you want to delete this event?")) {
+      if (confirm("Delete this event?")) {
         this.$store.dispatch("onDeleteEvent", eventId);
+        this.$store.dispatch("loadEvents");
       }
     }
   },

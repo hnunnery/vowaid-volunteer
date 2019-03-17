@@ -5,7 +5,7 @@
         <EditProfile/>
       </v-flex>
 
-      <v-flex xs12 sm10 md8 lg6 lx5 class="mt-4">
+      <v-flex xs12 sm8 md6 lg5 xl4 class="mt-4">
         <v-card class="pa-2 text-xs-center">
           <h2 class="my-3 primary--text headline">{{ user.first }} {{ user.last }}</h2>
           <p class="my-3 secondary--text subheading font-weight-bold">{{ user.email }}</p>
@@ -35,8 +35,8 @@ export default {
     };
   },
   watch: {
-    user(value) {
-      if (value === null || value === undefined) {
+    loggedIn(user) {
+      if (user === null || user === undefined) {
         this.$router.push("/");
       }
     }
