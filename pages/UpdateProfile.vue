@@ -118,3 +118,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+form {
+  font-size: 16px !important;
+}
+</style>

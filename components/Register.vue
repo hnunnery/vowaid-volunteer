@@ -44,7 +44,6 @@ export default {
   },
   methods: {
     onAgree() {
-      console.log(this.eventId);
       if (this.userIsRegistered) {
         this.$store.dispatch("unregisterUserFromEvent", this.eventId);
       } else {
