@@ -368,9 +368,9 @@ export const actions = {
 
 export const getters = {
   loadedEvents(state) {
-    return state.loadedEvents.sort((eventA, eventB) => {
-      return eventA.date > eventB.date;
-    });
+    return state.loadedEvents.sort((eventA, eventB) =>
+      eventA.date < eventB.date ? -1 : 1
+    );
   },
   loadedEvent(state) {
     return eventId => {
