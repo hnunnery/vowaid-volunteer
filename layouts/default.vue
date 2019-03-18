@@ -133,23 +133,6 @@
     <v-footer height="auto" class="page-footer">
       <v-card flat tile color="#1C1C1C" class="flex">
         <v-layout row wrap justify-center align-center class="mt-2 mb-3">
-          <v-flex xs12 class="text-xs-center mb-2">
-            <v-btn class="mx-3" icon>
-              <a href="https://www.facebook.com/vowaid" target="_blank">
-                <v-icon class="white--text" size="32px">fab fa-facebook</v-icon>
-              </a>
-            </v-btn>
-            <v-btn class="mx-3" icon>
-              <a href="https://twitter.com/vow_aid" target="_blank">
-                <v-icon class="white--text" size="32px">fab fa-twitter</v-icon>
-              </a>
-            </v-btn>
-            <v-btn class="mx-3" icon>
-              <a href="https://www.instagram.com/vow_aid" target="_blank">
-                <v-icon class="white--text" size="32px">fab fa-instagram</v-icon>
-              </a>
-            </v-btn>
-          </v-flex>
           <v-flex xs12 class="text-xs-center">
             <v-layout row wrap>
               <v-flex xs12 md6>

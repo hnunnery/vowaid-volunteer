@@ -4,7 +4,7 @@
       <v-flex xs12 sm8 lg6>
         <v-card class="px-2">
           <v-container>
-            <form @submit.prevent="updateProfile">
+            <form @submit.prevent="onSaveChanges">
               <v-layout row wrap justify-center>
                 <v-flex xs12 class="text-xs-center">
                   <h4 class="display-1 primary--text mt-2">User Profile</h4>
@@ -60,7 +60,18 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 class="text-xs-center">
-                  <v-btn @click="onSaveChanges" large class="primary white--text">Submit</v-btn>
+                  <v-btn
+                    type="submit"
+                    :disabled="loading"
+                    :loading="loading"
+                    large
+                    class="primary white--text"
+                  >
+                    Save Profile
+                    <span slot="loader" class="custom-loader">
+                      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                    </span>
+                  </v-btn>
                 </v-flex>
               </v-layout>
             </form>
@@ -76,7 +87,7 @@ export default {
   props: ["user"],
   data() {
     return {
-      editDialog: false,
+      loading: false,
       id: this.$store.getters.user.id,
       first: "",
       last: "",
@@ -87,7 +98,6 @@ export default {
   },
   methods: {
     onSaveChanges() {
-      this.editDialog = false;
       this.$store.dispatch("updateUserData", {
         id: this.id,
         first: this.first,
@@ -96,7 +106,11 @@ export default {
         phone: this.phone,
         city: this.city
       });
-      this.$router.push("/profile");
+      this.loading = true;
+      setTimeout(() => {
+        this.$router.push("/profile");
+        this.loading = false;
+      }, 1000);
     }
   }
 };

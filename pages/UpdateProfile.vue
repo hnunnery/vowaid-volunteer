@@ -4,7 +4,7 @@
       <v-flex xs11 sm8 lg5>
         <v-card class="px-2 mt-4">
           <v-container>
-            <form @submit.prevent="updateProfile">
+            <form @submit.prevent="onSaveChanges">
               <v-layout row wrap justify-center>
                 <v-flex xs12 class="text-xs-center">
                   <h4 class="display-1 primary--text my-2">Update Profile</h4>
@@ -60,10 +60,18 @@
                   ></v-text-field>
                 </v-flex>
                 <v-flex xs12 class="text-xs-center">
-                  <v-btn @click="onSaveChanges" large class="primary white--text">Update Profile</v-btn>
-                </v-flex>
-                <v-flex xs12>
-                  <v-alert v-model="alert" dismissible type="success">Profile Updated Successfully</v-alert>
+                  <v-btn
+                    type="submit"
+                    :disabled="loading"
+                    :loading="loading"
+                    large
+                    class="primary white--text"
+                  >
+                    Update Profile
+                    <span slot="loader" class="custom-loader">
+                      <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                    </span>
+                  </v-btn>
                 </v-flex>
               </v-layout>
             </form>
@@ -81,7 +89,7 @@ export default {
   data() {
     return {
       editDialog: false,
-      alert: false,
+      loading: false,
       id: this.$store.getters.user.id,
       first: this.$store.getters.user.first,
       last: this.$store.getters.user.last,
@@ -101,7 +109,11 @@ export default {
         phone: this.phone,
         city: this.city
       });
-      this.alert = true;
+      this.loading = true;
+      setTimeout(() => {
+        this.$router.push("/profile");
+        this.loading = false;
+      }, 1000);
     }
   }
 };
