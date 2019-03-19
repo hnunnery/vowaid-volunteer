@@ -9,7 +9,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    title: "VOWAID Volunteers",
+    title: "Volunteer | VOWAID Foundation",
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
@@ -25,8 +25,8 @@ module.exports = {
           "veteran, veterans, non-profit, non profit, charity, charitable, organization, military, vet, vets, war, donate, donation, donations, foundation, 501, 501c, 501 c, san antonio, marine, marines"
       },
       { name: "robots", content: "index" },
-      { name: "apple-mobile-app-title", content: "VOWAID" },
-      { name: "application-name", content: "VOWAID" },
+      { name: "apple-mobile-app-title", content: "Volunteer" },
+      { name: "application-name", content: "Volunteer" },
       { name: "msapplication-TileColor", content: "#2a2968" },
       { name: "msapplication-config", content: "/icons/browserconfig.xml" },
       { name: "theme-color", content: "#ffffff" },
@@ -37,14 +37,17 @@ module.exports = {
       },
       {
         property: "og:description",
-        content: "Non-profit organization dedicated to assisting Veterans"
+        content: "Volunteer event registration for VOWAID Foundation"
       },
       {
         property: "og:image",
         content:
           "https://res.cloudinary.com/missionwebdev/image/upload/f_auto/v1539475870/VOWAID/vowaid_twitter_card.jpg"
       },
-      { property: "og:url", content: "https://www.vowaidfoundation.org" },
+      {
+        property: "og:url",
+        content: "https://www.volunteer.vowaidfoundation.org"
+      },
       { name: "twitter:card", content: "summary_large_image" }
     ],
     link: [
