@@ -82,7 +82,7 @@
                     </v-flex>
                     <v-flex xs6 sm4>
                       <nuxt-link
-                        :to="{ name: 'Registered', params: { eventId: event.id, eventTitle: event.title } }"
+                        :to="{ name: 'Registered', params: { eventId: event.id, eventTitle: event.title, eventLocation: event.location, eventDate: event.date, eventTime: event.time } }"
                       >
                         <v-btn large flat class="green--text">
                           <v-icon small left class="green--text">fas fa-clipboard-list</v-icon>Roster

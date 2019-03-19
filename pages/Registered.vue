@@ -1,22 +1,23 @@
 <template>
   <v-container>
     <v-layout row wrap justify-center class="mb-5">
-      <v-flex xs12 class="text-xs-center">
-        <h1 class="primary--text">{{ eventTitle }}</h1>
-        <v-btn
-          @click="getRegisteredUsers"
-          :disabled="loading"
-          :loading="loading"
-          class="primary my-4"
-          large
-        >
-          Generate Roster
-          <span slot="loader" class="custom-loader">
-            <v-progress-circular indeterminate color="primary"></v-progress-circular>
-          </span>
-        </v-btn>
+      <v-flex xs12 class="text-xs-center mb-4">
+        <v-layout row wrap justify-center>
+          <v-flex xs12>
+            <h1 class="primary--text">{{ eventTitle }}</h1>
+          </v-flex>
+          <v-flex xs12 sm6 class="text-xs-center text-sm-right px-2">
+            <h2 class="secondary--text">{{ eventLocation }}</h2>
+          </v-flex>
+          <v-flex xs12 sm6 class="text-xs-center text-sm-left px-2">
+            <h2 class="secondary--text">{{ eventDate }} - {{ eventTime }}</h2>
+          </v-flex>
+        </v-layout>
       </v-flex>
-      <v-flex xs12 lg10 xl8>
+      <v-flex xs12 v-if="loading" class="text-xs-center">
+        <v-progress-circular :size="70" color="primary" indeterminate></v-progress-circular>
+      </v-flex>
+      <v-flex xs12 lg10 xl8 v-else>
         <v-card>
           <v-list three-line>
             <div v-for="user in registeredUsers" :key="user.id">
@@ -24,12 +25,12 @@
               <v-list-tile>
                 <v-layout row wrap justify-center align-center>
                   <v-flex xs12 sm8 md4>
-                    <p class="secondary--text">{{ user.first }} {{ user.last }}</p>
+                    <p class="secondary--text title pb-1">{{ user.first }} {{ user.last }}</p>
                   </v-flex>
-                  <v-flex xs12 sm4 md4>
+                  <v-flex xs12 sm4 md4 class="text-xs-left text-sm-right text-md-center">
                     <p class="secondary--text">{{ user.phone }}</p>
                   </v-flex>
-                  <v-flex xs12 sm12 md4>
+                  <v-flex xs12 sm12 md4 class="text-xs-left text-sm-right text-md-left">
                     <p class="secondary--text">{{ user.email }}</p>
                   </v-flex>
                 </v-layout>
@@ -51,6 +52,9 @@ export default {
       loading: true,
       eventId: this.$route.params.eventId,
       eventTitle: this.$route.params.eventTitle,
+      eventLocation: this.$route.params.eventLocation,
+      eventDate: this.$route.params.eventDate,
+      eventTime: this.$route.params.eventTime,
       registeredUsers: [],
       allUsers: []
     };
@@ -76,8 +80,23 @@ export default {
       }
     }
   },
-  methods: {
-    getRegisteredUsers() {
+  // methods: {
+  //   getRegisteredUsers() {
+  //     this.allUsers.forEach(user => {
+  //       if (user.registrations) {
+  //         let list = Object.values(user.registrations);
+  //         // console.log(list);
+  //         if (list.includes(this.eventId)) {
+  //           this.registeredUsers.push(user);
+  //         }
+  //       }
+  //     });
+  //     // console.log("Registered Users Created");
+  //   }
+  // },
+  watch: {
+    loading() {
+      this.allUsers = this.$store.getters.allUsers;
       this.allUsers.forEach(user => {
         if (user.registrations) {
           let list = Object.values(user.registrations);
@@ -87,12 +106,6 @@ export default {
           }
         }
       });
-      // console.log("Registered Users Created");
-    }
-  },
-  watch: {
-    loading() {
-      this.allUsers = this.$store.getters.allUsers;
     }
   },
   created() {
