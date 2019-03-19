@@ -140,7 +140,12 @@ export default {
         this.$store.getters.user !== null &&
         this.$store.getters.user !== undefined
       ) {
-        return this.$store.getters.user.id === "pCDpfVtvVqdzMvFBkZIvjY7gJSR2";
+        if (
+          this.$store.getters.user.id === "pCDpfVtvVqdzMvFBkZIvjY7gJSR2" ||
+          this.$store.getters.user.id === "5Lg4ySQxUhXwp4dk8jThs2RZBtq2"
+        ) {
+          return true;
+        }
       }
     },
     userHasProfileInfo() {
