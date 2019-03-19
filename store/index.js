@@ -376,7 +376,6 @@ export const actions = {
         let allUsers = Object.values(obj);
         commit("setAllUsers", allUsers);
         commit("setLoading", false);
-        // console.log(allUsers);
       })
       .catch(error => {
         console.log(error);

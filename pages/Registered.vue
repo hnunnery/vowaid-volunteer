@@ -52,13 +52,10 @@ export default {
       eventId: this.$route.params.eventId,
       eventTitle: this.$route.params.eventTitle,
       registeredUsers: [],
-      allUsers: this.$store.getters.allUsers
+      allUsers: []
     };
   },
   computed: {
-    events() {
-      return this.$store.getters.loadedEvents;
-    },
     userAuth() {
       return (
         this.$store.getters.user !== null &&
@@ -85,6 +82,12 @@ export default {
           }
         }
       });
+      console.log("Registered Users Created");
+    }
+  },
+  watch: {
+    loading() {
+      this.allUsers = this.$store.getters.allUsers;
     }
   },
   created() {
@@ -95,7 +98,7 @@ export default {
     // allows async data to load
     setTimeout(() => {
       this.loading = false;
-    }, 2000);
+    }, 1500);
   }
 };
 </script>
