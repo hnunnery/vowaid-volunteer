@@ -27,12 +27,7 @@
                     v-if="event.imageUrl != null"
                     :src="event.imageUrl"
                     alt="event"
-                    class="responsive-img"
-                  >
-                  <img
-                    v-else
-                    src="https://res.cloudinary.com/missionwebdev/image/upload/f_auto,h_40/v1535239007/VOWAID/favicon.ico"
-                    alt="logo"
+                    class="responsive-img mt-3"
                   >
                 </v-list-tile-avatar>
 
@@ -44,8 +39,8 @@
                   >{{ event.date }} - {{ event.time }}</v-list-tile-sub-title>
                 </v-list-tile-content>
                 <v-list-tile-action>
-                  <v-btn large icon @click="onAgree(event.id)" class="grey darken-2 white--text">
-                    <v-icon>fas fa-times</v-icon>
+                  <v-btn icon class="green white--text">
+                    <v-icon>fas fa-check</v-icon>
                   </v-btn>
                 </v-list-tile-action>
               </v-list-tile>
@@ -82,13 +77,6 @@ export default {
         });
       }
       return filtered;
-    }
-  },
-  methods: {
-    onAgree(eventId) {
-      if (confirm("Unregister from event?")) {
-        this.$store.dispatch("unregisterUserFromEvent", eventId);
-      }
     }
   },
   watch: {
