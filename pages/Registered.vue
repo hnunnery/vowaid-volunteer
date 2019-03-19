@@ -3,7 +3,18 @@
     <v-layout row wrap justify-center class="mb-5">
       <v-flex xs12 class="text-xs-center">
         <h1 class="primary--text">{{ eventTitle }}</h1>
-        <v-btn @click="getRegisteredUsers" class="primary my-4" large>Generate Roster</v-btn>
+        <v-btn
+          @click="getRegisteredUsers"
+          :disabled="loading"
+          :loading="loading"
+          class="primary my-4"
+          large
+        >
+          Generate Roster
+          <span slot="loader" class="custom-loader">
+            <v-progress-circular indeterminate color="primary"></v-progress-circular>
+          </span>
+        </v-btn>
       </v-flex>
       <v-flex xs12 lg10 xl8>
         <v-card>
@@ -37,6 +48,7 @@ export default {
   middleware: "auth-guard",
   data() {
     return {
+      loading: true,
       eventId: this.$route.params.eventId,
       eventTitle: this.$route.params.eventTitle,
       registeredUsers: [],
@@ -78,6 +90,12 @@ export default {
   created() {
     // fetching users from firebase
     this.$store.dispatch("loadAllUsers");
+  },
+  mounted() {
+    // allows async data to load
+    setTimeout(() => {
+      this.loading = false;
+    }, 2000);
   }
 };
 </script>

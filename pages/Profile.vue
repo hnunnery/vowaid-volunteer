@@ -29,6 +29,12 @@
                     alt="event"
                     class="responsive-img mt-3"
                   >
+                  <img
+                    v-else
+                    src="../static/icons/favicon-32x32.png"
+                    alt="logo"
+                    class="responsive-img mt-3"
+                  >
                 </v-list-tile-avatar>
 
                 <v-list-tile-content>
