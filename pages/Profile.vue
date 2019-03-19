@@ -21,7 +21,7 @@
           <v-list three-line>
             <div v-for="event in matchedEvents" :key="event.id">
               <v-divider></v-divider>
-              <v-list-tile :key="event.title">
+              <v-list-tile>
                 <v-list-tile-avatar>
                   <img
                     v-if="event.imageUrl != null"
@@ -31,7 +31,7 @@
                   >
                   <img
                     v-else
-                    src="https://res.cloudinary.com/missionwebdev/image/upload/f_auto/v1535239007/VOWAID/favicon.ico"
+                    src="https://res.cloudinary.com/missionwebdev/image/upload/f_auto,h_40/v1535239007/VOWAID/favicon.ico"
                     alt="logo"
                   >
                 </v-list-tile-avatar>
