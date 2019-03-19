@@ -11,7 +11,7 @@
           <v-btn large class="primary">Sign In To Register for Events</v-btn>
         </nuxt-link>
       </v-flex>
-      <v-flex xs12 class="text-xs-center mt-4" v-if="userAuth && !userHasProfileInfo">
+      <v-flex xs12 class="text-xs-center mt-4" v-if="userAuth && !userHasProfileInfo && !delayed">
         <nuxt-link to="/profile">
           <v-btn large class="primary">Update Profile Before Registering</v-btn>
         </nuxt-link>
@@ -104,7 +104,8 @@ export default {
   props: ["id"],
   data() {
     return {
-      registered: ""
+      registered: "",
+      delayed: true
     };
   },
   methods: {
@@ -156,6 +157,12 @@ export default {
         this.$store.dispatch("fetchUserData");
       }
     });
+  },
+  mounted() {
+    // keeps update button from flashing upon page load
+    setTimeout(() => {
+      this.delayed = false;
+    }, 1000);
   }
 };
 </script>

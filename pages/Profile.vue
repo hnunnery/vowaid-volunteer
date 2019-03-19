@@ -74,11 +74,13 @@ export default {
   computed: {
     matchedEvents() {
       let filtered = [];
-      this.events.forEach(event => {
-        if (this.user.registeredEvents.includes(event.id)) {
-          filtered.push(event);
-        }
-      });
+      if (this.user.registeredEvents) {
+        this.events.forEach(event => {
+          if (this.user.registeredEvents.includes(event.id)) {
+            filtered.push(event);
+          }
+        });
+      }
       return filtered;
     }
   },
