@@ -10,6 +10,7 @@ if (!firebase.apps.length) {
 export const state = () => ({
   loadedEvents: [],
   user: null,
+  allUsers: [],
   loading: false,
   error: null
 });
@@ -59,6 +60,9 @@ export const mutations = {
   },
   setUser(state, payload) {
     state.user = payload;
+  },
+  setAllUsers(state, payload) {
+    state.allUsers = payload;
   },
   setLoading(state, payload) {
     state.loading = payload;
@@ -361,6 +365,24 @@ export const actions = {
     commit("setUser", null);
     this.$router.push("/");
   },
+  loadAllUsers({ commit }) {
+    commit("setLoading", true);
+    firebase
+      .database()
+      .ref("users")
+      .once("value")
+      .then(data => {
+        let obj = data.val();
+        let allUsers = Object.values(obj);
+        commit("setAllUsers", allUsers);
+        commit("setLoading", false);
+        // console.log(allUsers);
+      })
+      .catch(error => {
+        console.log(error);
+        commit("setLoading", false);
+      });
+  },
   clearError({ commit }) {
     commit("clearError");
   }
@@ -381,6 +403,9 @@ export const getters = {
   },
   user(state) {
     return state.user;
+  },
+  allUsers(state) {
+    return state.allUsers;
   },
   loading(state) {
     return state.loading;

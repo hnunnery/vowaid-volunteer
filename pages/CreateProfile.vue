@@ -84,7 +84,6 @@
 
 <script>
 export default {
-  props: ["user"],
   data() {
     return {
       loading: false,

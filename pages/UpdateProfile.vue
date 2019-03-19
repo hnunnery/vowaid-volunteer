@@ -85,7 +85,6 @@
 <script>
 export default {
   middleware: "auth-guard",
-  props: ["user"],
   data() {
     return {
       editDialog: false,

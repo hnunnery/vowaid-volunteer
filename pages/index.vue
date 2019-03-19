@@ -65,8 +65,8 @@
                     v-if="userAuth && !userIsAdmin && userHasProfileInfo"
                     :eventId="event.id"
                   />
-                  <v-layout v-if="userIsAdmin">
-                    <v-flex xs6>
+                  <v-layout row wrap justify-center v-if="userIsAdmin">
+                    <v-flex xs6 sm4>
                       <v-btn
                         @click="deleteEvent(event.id)"
                         flat
@@ -77,8 +77,15 @@
                         <v-icon small left class="red--text text--darken-2">fas fa-trash-alt</v-icon>Delete
                       </v-btn>
                     </v-flex>
-                    <v-flex xs6>
+                    <v-flex xs6 sm4>
                       <Edit :event="event"/>
+                    </v-flex>
+                    <v-flex xs6 sm4>
+                      <nuxt-link :to="{ name: 'Registered', params: { eventId: event.id, eventTitle: event.title } }">
+                        <v-btn large flat class="green--text">
+                          <v-icon small left class="green--text">fas fa-clipboard-list</v-icon>Roster
+                        </v-btn>
+                      </nuxt-link>
                     </v-flex>
                   </v-layout>
                 </div>
