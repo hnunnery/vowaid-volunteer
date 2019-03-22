@@ -1,17 +1,15 @@
 <template>
   <v-container>
     <v-layout row wrap justify-center>
-      <v-flex xs12 class="text-xs-center">
-        <v-btn to="/updateprofile" large class="primary">
-          <v-icon left small class="white--text">fas fa-pencil-alt</v-icon>Update Profile
-        </v-btn>
-      </v-flex>
       <v-flex xs12 sm8 md6 lg5 xl4 class="mt-4">
         <v-card class="pa-2 text-xs-center">
           <h2 class="my-3 primary--text headline">{{ user.first }} {{ user.last }}</h2>
           <p class="my-3 secondary--text subheading font-weight-bold">{{ user.email }}</p>
           <p class="my-3 secondary--text subheading font-weight-bold">{{ user.phone }}</p>
           <p class="my-3 secondary--text subheading font-weight-bold">{{ user.city }}</p>
+          <v-btn to="/updateprofile" class="primary">
+            <v-icon left small class="white--text">fas fa-pencil-alt</v-icon>Update Profile
+          </v-btn>
         </v-card>
       </v-flex>
     </v-layout>
