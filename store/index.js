@@ -171,8 +171,8 @@ export const actions = {
           .put(payload.image);
       })
       .then(fileData => {
-        imageUrl = fileData.ref.getDownloadURL().then(downloadURL => {
-          console.log(downloadURL);
+        fileData.ref.getDownloadURL().then(downloadURL => {
+          imageUrl - downloadURL;
         });
         return firebase
           .database()
