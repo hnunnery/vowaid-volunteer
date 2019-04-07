@@ -172,7 +172,7 @@ export const actions = {
       })
       .then(fileData => {
         fileData.ref.getDownloadURL().then(downloadURL => {
-          imageUrl - downloadURL;
+          imageUrl = downloadURL;
         });
         return firebase
           .database()
