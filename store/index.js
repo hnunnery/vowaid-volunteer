@@ -144,6 +144,7 @@ export const actions = {
       });
   },
   createEvent({ commit, getters }, payload) {
+    commit("setLoading", true);
     const event = {
       title: payload.title,
       location: payload.location,
@@ -179,10 +180,11 @@ export const actions = {
             .child(key)
             .update({ imageUrl: myUrl });
         });
+        commit("setLoading", false);
       })
-      // NEED A WAY TO UPDATE WITHOUT A HARD REFRESH
       .catch(error => {
         console.log(error);
+        commit("setLoading", false);
       });
   },
   updateEventData({ commit }, payload) {

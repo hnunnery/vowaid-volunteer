@@ -6,7 +6,7 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap justify-center v-else>
-      <v-flex xs12 class="text-xs-center mt-4" v-if="!userAuth">
+      <v-flex xs12 class="text-xs-center mt-4" v-if="!userAuth && !delayed">
         <nuxt-link to="/signin">
           <v-btn large class="primary">Sign In To Register for Events</v-btn>
         </nuxt-link>

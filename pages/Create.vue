@@ -48,7 +48,18 @@
               <v-img :src="imageUrl"></v-img>
             </v-flex>
             <v-flex xs12 class="text-xs-center">
-              <v-btn type="submit" large class="primary white--text">Create Event</v-btn>
+              <v-btn
+                type="submit"
+                large
+                class="primary white--text"
+                :disabled="loading"
+                :loading="loading"
+              >
+                Create Event
+                <span slot="loader" class="custom-loader">
+                  <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                </span>
+              </v-btn>
             </v-flex>
           </v-layout>
         </form>
@@ -68,7 +79,8 @@ export default {
       description: "",
       date: "",
       time: "",
-      image: null
+      image: null,
+      ready: false
     };
   },
   methods: {
@@ -82,7 +94,7 @@ export default {
         time: this.time
       };
       this.$store.dispatch("createEvent", eventData);
-      this.$router.push("/");
+      this.ready = true;
     },
     onPickFile() {
       this.$refs.fileInput.click();
@@ -99,6 +111,19 @@ export default {
       });
       fileReader.readAsDataURL(files[0]);
       this.image = files[0];
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
+    }
+  },
+  watch: {
+    loading() {
+      if (this.ready && !this.loading) {
+        this.$store.dispatch("loadEvents");
+        this.$router.push("/");
+      }
     }
   }
 };
