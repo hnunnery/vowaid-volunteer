@@ -152,7 +152,7 @@ export const actions = {
       time: payload.time,
       creatorId: getters.user.id
     };
-    let imageUrl;
+    let myUrl;
     let key;
     firebase
       .database()
@@ -172,21 +172,15 @@ export const actions = {
       })
       .then(fileData => {
         fileData.ref.getDownloadURL().then(downloadURL => {
-          imageUrl = downloadURL;
-        });
-        return firebase
-          .database()
-          .ref("events")
-          .child(key)
-          .update({ imageUrl: imageUrl });
-      })
-      .then(() => {
-        commit("createEvent", {
-          ...event,
-          imageUrl: imageUrl,
-          id: key
+          myUrl = downloadURL;
+          return firebase
+            .database()
+            .ref("events")
+            .child(key)
+            .update({ imageUrl: myUrl });
         });
       })
+      // NEED A WAY TO UPDATE WITHOUT A HARD REFRESH
       .catch(error => {
         console.log(error);
       });
