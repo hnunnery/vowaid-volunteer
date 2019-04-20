@@ -48,8 +48,8 @@
       "type": "image/png"
     }
   ],
-  "theme_color": "#ffffff",
-  "background_color": "#ffffff",
+  "theme_color": "#9e9e9e",
+  "background_color": "#9e9e9e",
   "start_url": "https://www.volunteer.vowaidfoundation.org",
   "display": "standalone"
 }
