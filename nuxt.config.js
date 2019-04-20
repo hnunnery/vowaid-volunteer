@@ -65,7 +65,7 @@ module.exports = {
       {
         rel: "apple-touch-icon",
         sizes: "180x180",
-        href: "/icons/apple-touch-icon.png"
+        href: "/icons/apple-touch-icon.png?v=rMqEMaoeAo"
       },
       {
         rel: "icon",
